@@ -128,9 +128,9 @@ namespace API.Controllers
             }
 
             clase.Nombre = productDto.Nombre;
-            clase.Fecha = productDto.Fecha;
-            clase.Clase2_ID = clase.Clase2_ID;
-            clase.Clase4_ID = clase.Clase4_ID;
+            clase.Fecha = productDto.Fecha;      //Solo cambia nombres
+            clase.Clase2_ID = productDto.Clase2_ID;
+            clase.Clase4_ID = productDto.Clase4_ID;
            
 
             // Guardar los cambios en la base de datos
