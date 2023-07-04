@@ -1,4 +1,7 @@
+using API;
 using API.Data;
+using API.Repository;
+using API.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +17,13 @@ builder.Services.AddDbContext<DataContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddAutoMapper(typeof(MappingConfig));
+
+builder.Services.AddScoped<IClase1Repository, Clase1Repository>();
+builder.Services.AddScoped<IClase2Repository, Clase2Repository>();
+builder.Services.AddScoped<IClase3Repository, Clase3Repository>();
+builder.Services.AddScoped<IClase4Repository, Clase4Repository>();
 
 var app = builder.Build();
 

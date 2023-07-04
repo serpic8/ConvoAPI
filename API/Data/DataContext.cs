@@ -14,5 +14,7 @@ namespace API.Data
         public DbSet<Clase2> clase2 => Set<Clase2>();
         public DbSet<Clase3> clase3 => Set<Clase3>();
         public DbSet<Clase4> clase4 => Set<Clase4>();
+        
+
     }
 }
