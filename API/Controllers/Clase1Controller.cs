@@ -2,7 +2,9 @@
 using API.Models.Dto;
 using API.Repository.IRepository;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace API.Controllers
 {
@@ -23,6 +25,7 @@ namespace API.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [Authorize(Roles = "Admin")] //Roles con los cuales puedo usar la autorizacion, para ver los role puedo observar el data contexts
         public async Task<ActionResult<IEnumerable<Clase1Dto>>> GetProducts()
         {
             _logger.LogInformation("Obtener los Datos");
@@ -35,6 +38,7 @@ namespace API.Controllers
         [HttpDelete("{id}", Name = "DeleteProduct")] //El nombre se puede cambiar
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteProduct(int id)
         {
             var product = await _clase1Repo.GetById(id);
@@ -52,6 +56,7 @@ namespace API.Controllers
         [HttpPost("Products", Name = "AddProducts")] //Aqui tmb
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Clase1Dto>> AddProduct([FromBody] Clase1CreateDto clase1CreateDto)
         {
             try
@@ -108,6 +113,7 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> UpdateProduct(int id, [FromBody] Clase1UpdateDto productDto)
         {
             if (id <= 0)
